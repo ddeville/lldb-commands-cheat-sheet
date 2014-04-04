@@ -9,6 +9,6 @@ In order to build the docset you first need to install the `cheatset` gem
 You can then build the docset by running:
 
 ```
-cheatset generate lldb-commands.rb
+> cheatset generate lldb-commands.rb
 ```
 
