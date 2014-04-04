@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>LLDB Commands</title>
+    <link href='style.css' rel='stylesheet'>
+    <link href='//dash_ref/Category/Execution Commands/1'>
+    <link href='//dash_ref_Execution Commands/Entry/Launch a process no arguments/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Launch a process with arguments/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Launch a process for with arguments a.out 1 2 3 without having to supply the args every time/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Launch a process with arguments in new terminal window (Mac OS X only)/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Launch a process with arguments in existing terminal %2Fdev%2Fttys006 (Mac OS X only)/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Set environment variables for process before launching/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Unset environment variables for process before launching/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Show the arguments that will be or were passed to the program when run/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Set environment variables for process and launch process in one command/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Attach to a process with process ID 123/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Attach to a process named "a.out"/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Wait for a process named "a.out" to launch and attach/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Attach to a remote gdb protocol server running on system "eorgadd", port 8000./0'>
+    <link href='//dash_ref_Execution Commands/Entry/Attach to a remote gdb protocol server running on the local system, port 8000/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Attach to a Darwin kernel in kdp mode on system "eorgadd"/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Do a source level single step in the currently selected thread/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Do a source level single step over in the currently selected thread/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Do an instruction level single step in the currently selected thread/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Do an instruction level single step over in the currently selected thread/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Step out of the currently selected frame/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Return immediately from the currently selected frame, with an optional return value/0'>
+    <link href='//dash_ref_Execution Commands/Entry/Backtrace and disassemble every time you stop/0'>
+    <link href='//dash_ref/Category/Breakpoint Commands/1'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all functions named main/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint in file test.c at line 12/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all C++ methods whose basename is main/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at and object C function: -[NSString stringWithFormat:]/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all Objective C methods whose selector is count/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint by regular expression on function name/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Ensure that breakpoints by file and line work for #included .c%2F.cpp%2F.m files/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint by regular expression on source file contents/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Set a conditional breakpoint/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/List all breakpoints/0'>
+    <link href='//dash_ref_Breakpoint Commands/Entry/Delete a breakpoint/0'>
+    <link href='//dash_ref/Category/Watchpoint Commands/1'>
+    <link href='//dash_ref_Watchpoint Commands/Entry/Set a watchpoint on a variable when it is written to/0'>
+    <link href="//dash_ref_Watchpoint Commands/Entry/Set a watchpoint on a memory location when it is written into. The size of the region to watch for defaults to the pointer size if no '-x byte_size' is specified. This command takes raw input, evaluated as an expression returning an unsigned integer pointing to the start of the region, after the '--' option terminator/0">
+    <link href='//dash_ref_Watchpoint Commands/Entry/Set a condition on a watchpoint/0'>
+    <link href='//dash_ref_Watchpoint Commands/Entry/List all watchpoints/0'>
+    <link href='//dash_ref_Watchpoint Commands/Entry/Delete a watchpoint/0'>
+    <link href='//dash_ref/Category/Examining Variables/1'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the arguments and local variables for the current frame/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the local variables for the current frame/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the contents of local variable "bar"/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the contents of local variable "bar" formatted as hex/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the contents of global variable "baz"/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Show the global%2Fstatic variables defined in the current source file/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Display a the variable "argc" and "argv" every time you stop/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Display a the variable "argc" and "argv" only when you stop in the function named main/0'>
+    <link href='//dash_ref_Examining Variables/Entry/Display the variable "this" only when you stop in c class named *MyClass**/0'>
+    <link href='//dash_ref/Category/Evaluating Expressions/1'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Evaluating a generalized expression in the current frame/0'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Creating and assigning a value to a convenience variable/0'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Printing the ObjC "description" of an object/0'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Print the dynamic type of the result of an expression/0'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Calling a function so you can stop at a breakpoint in the function/0'>
+    <link href='//dash_ref_Evaluating Expressions/Entry/Calling a function that crashes, and stopping when the function crashes/0'>
+    <link href='//dash_ref/Category/Examining Thread State/1'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the stack backtrace for the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the stack backtraces for all threads/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Backtrace the first five frames of the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Select a different stack frame by index for the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/List information about the currently selected frame in the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Select the stack frame that called the current stack frame/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Select the stack frame that is called by the current stack frame/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Select a different stack frame using a relative offset/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the general purpose registers for the current thread/0'>
+    <link href="//dash_ref_Examining Thread State/Entry/Write a new decimal value '123' to the current thread register 'rax'/0">
+    <link href='//dash_ref_Examining Thread State/Entry/Skip 8 bytes ahead of the current program counter (instruction pointer). Note that we use backticks to evaluate an expression and insert the scalar result in LLDB/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the general purpose registers for the current thread formatted as signed decimal. LLDB tries to use the same format characters as printf(3) when possible. Type "help format" to see the full list of format specifiers./0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show all registers in all register sets for the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the values for the registers named "rax", "rsp" and "rbp" in the current thread/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show the values for the register named "rax" in the current thread formatted as binary/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Read memory from address 0xbffff3c0 and show 4 hex uint32_t values/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Read memory starting at the expression "argv[0]"/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Read 512 bytes of memory from address 0xbffff3c0 and save results to a local file as text/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Save binary memory data starting at 0x1000 and ending at 0x2000 to a file/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Get information about a specific heap allocation (available on Mac OS X only)/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Get information about a specific heap allocation and cast the result to any dynamic type that can be deduced (available on Mac OS X only)/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Find all heap blocks that contain a pointer specified by an expression EXPR (available on Mac OS X only)/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Find all heap blocks that contain a C string anywhere in the block (available on Mac OS X only)/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble the current function for the current frame/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble any functions named main/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble an address range/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble 20 instructions from a given address/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Show mixed source and disassembly for the current function for the current frame/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble the current function for the current frame and show the opcode bytes/0'>
+    <link href='//dash_ref_Examining Thread State/Entry/Disassemble the current source line for the current frame/0'>
+    <link href='//dash_ref/Category/Executable and Shared Library Query Commands/1'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/List the main executable and all dependent shared libraries/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for a raw address in the executable or any shared libraries/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up functions matching a regular expression in a binary/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Find full souce line information/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for an address in a.out only/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for for a type Point by name/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all sections from the main executable and any shared libraries/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all sections in the a.out module/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all symbols from the main executable and any shared libraries/0'>
+    <link href='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all symbols in a.out and liba.so/0'>
+    <link href='//dash_ref/Category/Miscellaneous/1'>
+    <link href='//dash_ref_Miscellaneous/Entry/Echo text to the screen/0'>
+    <link href="//dash_ref_Miscellaneous/Entry/Remap source file pathnames for the debug session. If your source files are no longer located in the same location as when the program was built --- maybe the program was built on a different computer --- you need to tell the debugger how to find the sources at their local file path instead of the build system's file path./0">
+  </head>
+  <body>
+    <header>
+      <h1>LLDB Commands</h1>
+    </header>
+    <article>
+      <p></p>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Execution Commands/1'>
+          Execution Commands
+        </h2>
+        <table>
+          <tr id='//dash_ref_Execution Commands/Entry/Launch a process no arguments/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Launch a process no arguments</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process launch&#x000A;(lldb) run&#x000A;(lldb) r</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Launch a process with arguments/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Launch a process with arguments <args></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process launch -- &lt;args&gt;&#x000A;(lldb) r &lt;args&gt;</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Launch a process for with arguments a.out 1 2 3 without having to supply the args every time/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Launch a process for with arguments a.out 1 2 3 without having to supply the args every time</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">% lldb -- a.out 1 2 3&#x000A;(lldb) run&#x000A;...&#x000A;(lldb) run&#x000A;...</pre>
+                
+                <p>or<br>
+                <code>&#x000A;(lldb) settings set target.run-args 1 2 3&#x000A;(lldb) run&#x000A;...&#x000A;(lldb) run&#x000A;...</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Launch a process with arguments in new terminal window (Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Launch a process with arguments in new terminal window (Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process launch --tty -- &lt;args&gt;&#x000A;(lldb) pro la -t -- &lt;args&gt;</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Launch a process with arguments in existing terminal %2Fdev%2Fttys006 (Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Launch a process with arguments in existing terminal /dev/ttys006 (Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process launch --tty=/dev/ttys006 -- &lt;args&gt;&#x000A;(lldb) pro la -t/dev/ttys006 -- &lt;args&gt;</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Set environment variables for process before launching/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set environment variables for process before launching</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) settings set target.env-vars DEBUG=1&#x000A;(lldb) set se target.env-vars DEBUG=1&#x000A;(lldb) env DEBUG=1</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Unset environment variables for process before launching/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Unset environment variables for process before launching</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) settings remove target.env-vars DEBUG&#x000A;(lldb) set rem target.env-vars DEBUG</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Show the arguments that will be or were passed to the program when run/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the arguments that will be or were passed to the program when run</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) settings show target.run-args&#x000A;target.run-args (array of strings) = [0]: "1" [1]: "2" [2]: "3"</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Set environment variables for process and launch process in one command/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set environment variables for process and launch process in one command</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process launch -v DEBUG=1</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Attach to a process with process ID 123/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Attach to a process with process ID 123</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process attach --pid 123  &#x000A;(lldb) attach -p 123</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Attach to a process named "a.out"/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Attach to a process named &quot;a.out&quot;</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process attach --name a.out&#x000A;(lldb) pro at -n a.out</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Wait for a process named "a.out" to launch and attach/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Wait for a process named &quot;a.out&quot; to launch and attach</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) process attach --name a.out --waitfor&#x000A;(lldb) pro at -n a.out -w</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Attach to a remote gdb protocol server running on system "eorgadd", port 8000./0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Attach to a remote gdb protocol server running on system &quot;eorgadd&quot;, port 8000.</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) gdb-remote eorgadd:8000</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Attach to a remote gdb protocol server running on the local system, port 8000/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Attach to a remote gdb protocol server running on the local system, port 8000</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) gdb-remote 8000</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Attach to a Darwin kernel in kdp mode on system "eorgadd"/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Attach to a Darwin kernel in kdp mode on system &quot;eorgadd&quot;</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) kdp-remote eorgadd</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Do a source level single step in the currently selected thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Do a source level single step in the currently selected thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread step-in&#x000A;(lldb) step&#x000A;(lldb) s</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Do a source level single step over in the currently selected thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Do a source level single step over in the currently selected thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread step-over&#x000A;(lldb) next&#x000A;(lldb) n</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Do an instruction level single step in the currently selected thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Do an instruction level single step in the currently selected thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread step-inst&#x000A;(lldb) si</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Do an instruction level single step over in the currently selected thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Do an instruction level single step over in the currently selected thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread step-inst-over&#x000A;(lldb) ni</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Step out of the currently selected frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Step out of the currently selected frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread step-out&#x000A;(lldb) finish</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Return immediately from the currently selected frame, with an optional return value/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Return immediately from the currently selected frame, with an optional return value</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread return &lt;RETURN EXPRESSION&gt;</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Execution Commands/Entry/Backtrace and disassemble every time you stop/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Backtrace and disassemble every time you stop</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target stop-hook add&#x000A;Enter your stop hook command(s). Type 'DONE' to end.&#x000A;&gt; bt&#x000A;&gt; disassemble --pc&#x000A;&gt; DONE&#x000A;Stop hook #1 added.</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Breakpoint Commands/1'>
+          Breakpoint Commands
+        </h2>
+        <table>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all functions named main/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint at all functions named <strong>main</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --name main&#x000A;(lldb) br s -n main&#x000A;(lldb) b main</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint in file test.c at line 12/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint in file <strong>test.c</strong> at line <strong>12</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --file test.c --line 12&#x000A;(lldb) br s -f test.c -l 12&#x000A;(lldb) b test.c:12</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all C++ methods whose basename is main/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint at all C++ methods whose basename is <strong>main</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --method main&#x000A;(lldb) br s -M main</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at and object C function: -[NSString stringWithFormat:]/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint at and object C function: <code>-[NSString stringWithFormat:]</code></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --name "-[NSString stringWithFormat:]"&#x000A;(lldb) b -[NSString stringWithFormat:]</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint at all Objective C methods whose selector is count/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint at all Objective C methods whose selector is <strong>count</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --selector count&#x000A;(lldb) br s -S count</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint by regular expression on function name/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint by regular expression on function name</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --func-regex regular-expression&#x000A;(lldb) br s -r regular-expression</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Ensure that breakpoints by file and line work for #included .c%2F.cpp%2F.m files/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Ensure that breakpoints by file and line work for #included .c/.cpp/.m files</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) settings set target.inline-breakpoint-strategy always&#x000A;(lldb) br s -f foo.c -l 12</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a breakpoint by regular expression on source file contents/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a breakpoint by regular expression on source file contents</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --source-pattern regular-expression --file SourceFile&#x000A;(lldb) br s -p regular-expression -f file</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Set a conditional breakpoint/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a conditional breakpoint</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint set --name foo --condition '(int)strcmp(y,"hello") == 0'&#x000A;(lldb) br s -n foo -c '(int)strcmp(y,"hello") == 0'</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/List all breakpoints/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>List all breakpoints</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint list&#x000A;(lldb) br l</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Breakpoint Commands/Entry/Delete a breakpoint/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Delete a breakpoint</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) breakpoint delete 1&#x000A;(lldb) br del 1</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Watchpoint Commands/1'>
+          Watchpoint Commands
+        </h2>
+        <table>
+          <tr id='//dash_ref_Watchpoint Commands/Entry/Set a watchpoint on a variable when it is written to/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a watchpoint on a variable when it is written to</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) watchpoint set variable global_var&#x000A;(lldb) wa s v global_var</pre></div>
+            </td>
+          </tr>
+          <tr id="//dash_ref_Watchpoint Commands/Entry/Set a watchpoint on a memory location when it is written into. The size of the region to watch for defaults to the pointer size if no '-x byte_size' is specified. This command takes raw input, evaluated as an expression returning an unsigned integer pointing to the start of the region, after the '--' option terminator/0">
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a watchpoint on a memory location when it is written into. The size of the region to watch for defaults to the pointer size if no &#39;-x byte_size&#39; is specified. This command takes raw input, evaluated as an expression returning an unsigned integer pointing to the start of the region, after the &#39;--&#39; option terminator</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) watchpoint set expression -- my_ptr&#x000A;(lldb) wa s e -- my_ptr</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Watchpoint Commands/Entry/Set a condition on a watchpoint/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Set a condition on a watchpoint</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) watch set var global&#x000A;(lldb) watchpoint modify -c '(global==5)'&#x000A;(lldb) c&#x000A;...&#x000A;(lldb) bt&#x000A;* thread #1: tid = 0x1c03, 0x0000000100000ef5 a.out`modify + 21 at main.cpp:16, stop reason = watchpoint 1&#x000A;frame #0: 0x0000000100000ef5 a.out`modify + 21 at main.cpp:16&#x000A;frame #1: 0x0000000100000eac a.out`main + 108 at main.cpp:25&#x000A;frame #2: 0x00007fff8ac9c7e1 libdyld.dylib`start + 1&#x000A;(lldb) frame var global&#x000A;(int32_t) global = 5</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Watchpoint Commands/Entry/List all watchpoints/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>List all watchpoints</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) watchpoint list&#x000A;(lldb) watch l</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Watchpoint Commands/Entry/Delete a watchpoint/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Delete a watchpoint</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) watchpoint delete 1&#x000A;(lldb) watch del 1</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Examining Variables/1'>
+          Examining Variables
+        </h2>
+        <table>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the arguments and local variables for the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the arguments and local variables for the current frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame variable&#x000A;(lldb) fr v</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the local variables for the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the local variables for the current frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame variable --no-args&#x000A;(lldb) fr v -a</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the contents of local variable "bar"/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the contents of local variable &quot;bar&quot;</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame variable bar&#x000A;(lldb) fr v bar&#x000A;(lldb) p bar</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the contents of local variable "bar" formatted as hex/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the contents of local variable &quot;bar&quot; formatted as hex</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame variable --format x bar&#x000A;(lldb) fr v -f x bar</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the contents of global variable "baz"/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the contents of global variable &quot;baz&quot;</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target variable baz&#x000A;(lldb) ta v baz</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Show the global%2Fstatic variables defined in the current source file/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the global/static variables defined in the current source file</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target variable&#x000A;(lldb) ta v</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Display a the variable "argc" and "argv" every time you stop/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Display a the variable &quot;argc&quot; and &quot;argv&quot; every time you stop</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target stop-hook add --one-liner "frame variable argc argv"&#x000A;(lldb) ta st a -o "fr v argc argv"&#x000A;(lldb) display argc&#x000A;(lldb) display argv</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Display a the variable "argc" and "argv" only when you stop in the function named main/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Display a the variable &quot;argc&quot; and &quot;argv&quot; only when you stop in the function named <strong>main</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target stop-hook add --name main --one-liner "frame variable argc argv"&#x000A;(lldb) ta st a -n main -o "fr v argc argv"</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Variables/Entry/Display the variable "this" only when you stop in c class named *MyClass**/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Display the variable &quot;<em>this&quot; only when you stop in c class named *</em>MyClass**</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) target stop-hook add --classname MyClass --one-liner "frame variable *this"&#x000A;(lldb) ta st a -c MyClass -o "fr v *this"</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Evaluating Expressions/1'>
+          Evaluating Expressions
+        </h2>
+        <table>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Evaluating a generalized expression in the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Evaluating a generalized expression in the current frame</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) expr (int) printf ("Print nine: %d.", 4 + 5)</pre>
+                
+                <p>or using the print alias:<br>
+                <code>&#x000A;(lldb) print (int) printf (&quot;Print nine: %d.&quot;, 4 + 5)</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Creating and assigning a value to a convenience variable/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Creating and assigning a value to a convenience variable</p></div>
+              <div class='notes'>
+                <p>In lldb you evaluate a variable declaration expression as you would write it in C:
+                <code>&#x000A;(lldb) expr unsigned int $foo = 5</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Printing the ObjC "description" of an object/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Printing the ObjC &quot;description&quot; of an object</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) expr -o -- [SomeClass returnAnObject]</pre>
+                
+                <p>or using the po alias:<br>
+                <code>&#x000A;(lldb) po [SomeClass returnAnObject]</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Print the dynamic type of the result of an expression/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Print the dynamic type of the result of an expression</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) expr -d 1 -- [SomeClass returnAnObject]&#x000A;(lldb) expr -d 1 -- someCPPObjectPtrOrReference</pre>
+                
+                <p>or set dynamic type printing to be the default:<br>
+                <code>&#x000A;(lldb) settings set target.prefer-dynamic run-target</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Calling a function so you can stop at a breakpoint in the function/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Calling a function so you can stop at a breakpoint in the function</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) expr -i 0 -- function_with_a_breakpoint()</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Evaluating Expressions/Entry/Calling a function that crashes, and stopping when the function crashes/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Calling a function that crashes, and stopping when the function crashes</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) expr -u 0 -- function_which_crashes()</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Examining Thread State/1'>
+          Examining Thread State
+        </h2>
+        <table>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the stack backtrace for the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the stack backtrace for the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread backtrace&#x000A;(lldb) bt</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the stack backtraces for all threads/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the stack backtraces for all threads</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread backtrace all&#x000A;(lldb) bt all</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Backtrace the first five frames of the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Backtrace the first five frames of the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) thread backtrace -c 5&#x000A;(lldb) bt 5 (lldb-169 and later)&#x000A;(lldb) bt -c 5 (lldb-168 and earlier)</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Select a different stack frame by index for the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Select a different stack frame by index for the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame select 12&#x000A;(lldb) fr s 12&#x000A;(lldb) f 12</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/List information about the currently selected frame in the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>List information about the currently selected frame in the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame info</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Select the stack frame that called the current stack frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Select the stack frame that called the current stack frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) up&#x000A;(lldb) frame select --relative=1</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Select the stack frame that is called by the current stack frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Select the stack frame that is called by the current stack frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) down&#x000A;(lldb) frame select --relative=-1&#x000A;(lldb) fr s -r-1</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Select a different stack frame using a relative offset/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Select a different stack frame using a relative offset</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) frame select --relative 2&#x000A;(lldb) fr s -r2&#x000A;&#x000A;(lldb) frame select --relative -3&#x000A;(lldb) fr s -r-3</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the general purpose registers for the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the general purpose registers for the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) register read</pre></div>
+            </td>
+          </tr>
+          <tr id="//dash_ref_Examining Thread State/Entry/Write a new decimal value '123' to the current thread register 'rax'/0">
+            <td class='description' colspan='2'>
+              <div class='name'><p>Write a new decimal value &#39;123&#39; to the current thread register &#39;rax&#39;</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) register write rax 123</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Skip 8 bytes ahead of the current program counter (instruction pointer). Note that we use backticks to evaluate an expression and insert the scalar result in LLDB/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Skip 8 bytes ahead of the current program counter (instruction pointer). Note that we use backticks to evaluate an expression and insert the scalar result in LLDB</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) register write pc `$pc+8`</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the general purpose registers for the current thread formatted as signed decimal. LLDB tries to use the same format characters as printf(3) when possible. Type "help format" to see the full list of format specifiers./0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the general purpose registers for the current thread formatted as <strong>signed decimal</strong>. LLDB tries to use the same format characters as <code>printf(3)</code> when possible. Type &quot;help format&quot; to see the full list of format specifiers.</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) register read --format i&#x000A;(lldb) re r -f i</pre>
+                
+                <p>LLDB now supports the GDB shorthand format syntax but there can&#39;t be space after the command:<br>
+                <code>&#x000A;(lldb) register read/d</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show all registers in all register sets for the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show all registers in all register sets for the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) register read --all&#x000A;(lldb) re r -a</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the values for the registers named "rax", "rsp" and "rbp" in the current thread/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the values for the registers named &quot;rax&quot;, &quot;rsp&quot; and &quot;rbp&quot; in the current thread</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) register read rax rsp rbp</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show the values for the register named "rax" in the current thread formatted as binary/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show the values for the register named &quot;rax&quot; in the current thread formatted as <strong>binary</strong></p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) register read --format binary rax&#x000A;(lldb) re r -f b rax</pre>
+                
+                <p>LLDB now supports the GDB shorthand format syntax but there can&#39;t be space after the command:<br>
+                <code>&#x000A;(lldb) register read/t rax&#x000A;(lldb) p/t $rax</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Read memory from address 0xbffff3c0 and show 4 hex uint32_t values/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Read memory from address 0xbffff3c0 and show 4 hex uint32_t values</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) memory read --size 4 --format x --count 4 0xbffff3c0&#x000A;(lldb) me r -s4 -fx -c4 0xbffff3c0&#x000A;(lldb) x -s4 -fx -c4 0xbffff3c0</pre>
+                
+                <p>LLDB now supports the GDB shorthand format syntax but there can&#39;t be space after the command:<br>
+                <code>&#x000A;(lldb) memory read/4xw 0xbffff3c0&#x000A;(lldb) x/4xw 0xbffff3c0&#x000A;(lldb) memory read --gdb-format 4xw 0xbffff3c0</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Read memory starting at the expression "argv[0]"/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Read memory starting at the expression &quot;argv[0]&quot;</p></div>
+              <div class='notes'>
+                <pre class="highlight plaintext">(lldb) memory read `argv[0]`</pre>
+                
+                <p>NOTE: any command can inline a scalar expression result (as long as the target is stopped) using backticks around any expression:<br>
+                <code>&#x000A;(lldb) memory read --size `sizeof(int)` `argv[0]`</code></p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Read 512 bytes of memory from address 0xbffff3c0 and save results to a local file as text/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Read 512 bytes of memory from address 0xbffff3c0 and save results to a local file as <strong>text</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) memory read --outfile /tmp/mem.txt --count 512 0xbffff3c0  &#x000A;(lldb) me r -o/tmp/mem.txt -c512 0xbffff3c0  &#x000A;(lldb) x/512bx -o/tmp/mem.txt 0xbffff3c0</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Save binary memory data starting at 0x1000 and ending at 0x2000 to a file/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Save binary memory data starting at 0x1000 and ending at 0x2000 to a file</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) memory read --outfile /tmp/mem.bin --binary 0x1000 0x2000&#x000A;(lldb) me r -o /tmp/mem.bin -b 0x1000 0x2000</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Get information about a specific heap allocation (available on Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Get information about a specific heap allocation (available on Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) command script import lldb.macosx.heap&#x000A;(lldb) process launch --environment MallocStackLogging=1 -- [ARGS]&#x000A;(lldb) malloc_info --stack-history 0x10010d680</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Get information about a specific heap allocation and cast the result to any dynamic type that can be deduced (available on Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Get information about a specific heap allocation and cast the result to any dynamic type that can be deduced (available on Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) command script import lldb.macosx.heap&#x000A;(lldb) malloc_info --type 0x10010d680</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Find all heap blocks that contain a pointer specified by an expression EXPR (available on Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Find all heap blocks that contain a pointer specified by an expression EXPR (available on Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) command script import lldb.macosx.heap&#x000A;(lldb) ptr_refs EXPR </pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Find all heap blocks that contain a C string anywhere in the block (available on Mac OS X only)/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Find all heap blocks that contain a C string anywhere in the block (available on Mac OS X only)</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) command script import lldb.macosx.heap&#x000A;(lldb) cstr_refs CSTRING</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble the current function for the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble the current function for the current frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --frame&#x000A;(lldb) di -f</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble any functions named main/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble any functions named <em>main</em></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --name main&#x000A;(lldb) di -n main</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble an address range/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble an address range</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --start-address 0x1eb8 --end-address 0x1ec3&#x000A;(lldb) di -s 0x1eb8 -e 0x1ec3</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble 20 instructions from a given address/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble 20 instructions from a given address</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --start-address 0x1eb8 --count 20&#x000A;(lldb) di -s 0x1eb8 -c 20</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Show mixed source and disassembly for the current function for the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Show mixed source and disassembly for the current function for the current frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --frame --mixed&#x000A;(lldb) di -f -m</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble the current function for the current frame and show the opcode bytes/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble the current function for the current frame and show the opcode bytes</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --frame --bytes&#x000A;(lldb) di -f -b</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Examining Thread State/Entry/Disassemble the current source line for the current frame/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Disassemble the current source line for the current frame</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) disassemble --line&#x000A;(lldb) di -l</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Executable and Shared Library Query Commands/1'>
+          Executable and Shared Library Query Commands
+        </h2>
+        <table>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/List the main executable and all dependent shared libraries/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>List the main executable and all dependent shared libraries</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image list</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for a raw address in the executable or any shared libraries/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Look up information for a raw address in the executable or any shared libraries</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image lookup --address 0x1ec4&#x000A;(lldb) im loo -a 0x1ec4</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up functions matching a regular expression in a binary/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Look up functions matching a regular expression in a binary</p></div>
+              <div class='notes'>
+                <p>This one finds debug symbols:<br>
+                <code>&#x000A;(lldb) image lookup -r -n &lt;FUNC_REGEX&gt;</code></p>
+                
+                <p>This one finds non-debug symbols:<br>
+                <code>&#x000A;(lldb) image lookup -r -s &lt;FUNC_REGEX&gt;</code></p>
+                
+                <p>Provide a list of binaries as arguments to limit the search.</p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Find full souce line information/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Find full souce line information</p></div>
+              <div class='notes'>
+                <p>This one is a bit messy at present. Do:<br>
+                <code>&#x000A;(lldb) image lookup -v --address 0x1ec4</code></p>
+                
+                <p>and look for the LineEntry line, which will have the full source path and line range information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for an address in a.out only/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Look up information for an address in <strong>a.out</strong> only</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image lookup --address 0x1ec4 a.out&#x000A; (lldb) im loo -a 0x1ec4 a.out</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Look up information for for a type Point by name/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Look up information for for a type <em>Point</em> by name</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image lookup --type Point&#x000A;(lldb) im loo -t Point</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all sections from the main executable and any shared libraries/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Dump all sections from the main executable and any shared libraries</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image dump sections</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all sections in the a.out module/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Dump all sections in the <strong>a.out</strong> module</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image dump sections a.out</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all symbols from the main executable and any shared libraries/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Dump all symbols from the main executable and any shared libraries</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image dump symtab</pre></div>
+            </td>
+          </tr>
+          <tr id='//dash_ref_Executable and Shared Library Query Commands/Entry/Dump all symbols in a.out and liba.so/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Dump all symbols in <strong>a.out</strong> and <strong>liba.so</strong></p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) image dump symtab a.out liba.so</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='category'>
+        <h2 id='//dash_ref/Category/Miscellaneous/1'>
+          Miscellaneous
+        </h2>
+        <table>
+          <tr id='//dash_ref_Miscellaneous/Entry/Echo text to the screen/0'>
+            <td class='description' colspan='2'>
+              <div class='name'><p>Echo text to the screen</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) script print "Here is some text"</pre></div>
+            </td>
+          </tr>
+          <tr id="//dash_ref_Miscellaneous/Entry/Remap source file pathnames for the debug session. If your source files are no longer located in the same location as when the program was built --- maybe the program was built on a different computer --- you need to tell the debugger how to find the sources at their local file path instead of the build system's file path./0">
+            <td class='description' colspan='2'>
+              <div class='name'><p>Remap source file pathnames for the debug session. If your source files are no longer located in the same location as when the program was built --- maybe the program was built on a different computer --- you need to tell the debugger how to find the sources at their local file path instead of the build system&#39;s file path.</p></div>
+              <div class='notes'><pre class="highlight plaintext">(lldb) settings set target.source-map /buildbot/path /my/path</pre></div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section class='notes'>
+        <h2>Notes</h2>
+        <p>Based on the <a href="http://lldb.llvm.org/lldb-gdb.html">GDB to LLDB command map</a> page on the <a href="http://llvm.org">LLVM</a> website</p>
+      </section>
+    </article>
+    <footer>
+      Generated with <a onclick="window.dash.openExternal_(this.href); return false;" href='https://github.com/Kapeli/cheatset#readme'>cheatset</a>
+    </footer>
+  </body>
+</html>
